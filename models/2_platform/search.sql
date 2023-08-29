@@ -18,6 +18,7 @@ transformed AS (
 SELECT
     RAW_DATA.date AS date
     ,month
+    ,EXTRACT(YEAR FROM  RAW_DATA.date) AS year
     ,dma
     ,tactic
     ,fiscal_month
@@ -37,7 +38,7 @@ FROM
          cast(day AS date) AS date
         ,SUBSTR(month, 1, INSTR(month, '-') - 1) AS month
         ,metro_area__matched_ AS metro_area_matched
-        ,CONCAT(SUBSTR(dma_region__matched_, 1, INSTR(dma_region__matched_, ' ') - 1),', ',SUBSTR(dma_region__matched_, INSTR(dma_region__matched_, ' ') + 1)) AS dma
+        ,dma_region__matched_ AS dma
         ,brand_or_nb AS tactic
         ,impr_ AS impressions
         ,clicks AS clicks
@@ -62,6 +63,7 @@ FROM
     GROUP BY
        RAW_DATA.date
     ,month
+    ,year
     ,dma
     ,tactic
     ,fiscal_month

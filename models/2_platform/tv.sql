@@ -38,7 +38,7 @@ FROM
 
     (
     SELECT
-         CONCAT(SUBSTR(dma, 1, INSTR(dma, ' ') - 1),', ',SUBSTR(dma, INSTR(dma, ' ') + 1)) AS dma
+         dma AS dma
         ,broadcast_year AS broadcast_year
         ,broadcast_month AS broadcast_month
         ,broadcast_period AS broadcast_period
