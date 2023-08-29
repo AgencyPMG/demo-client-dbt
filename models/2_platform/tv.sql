@@ -58,7 +58,7 @@ FROM
         ,grp_circ_impr AS grp_circ_impr
         ,offered_calls AS offered_calls
 
-    FROM search
+    FROM tv
 
     ) AS RAW_DATA
 

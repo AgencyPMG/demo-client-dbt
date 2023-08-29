@@ -51,7 +51,7 @@ FROM
     LEFT JOIN (
         SELECT
         CAST(date AS date) AS date
-        ,fiscalmonth AS fiscal_month
+        ,fiscal_month AS fiscal_month
         ,week AS week
         ,week_begins AS week_begins
         ,week_ends AS week_ends
