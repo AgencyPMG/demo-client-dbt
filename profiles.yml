@@ -1,0 +1,50 @@
+analytics:
+  target: bigquery-dev
+
+  outputs:
+    redshift-dev:
+      type: redshift
+      host: venus.redshift.alliplatform.com
+      user: "{{ env_var('DWHUSER') }}"
+      pass: "{{ env_var('PGPASSWORD') }}"
+      port: 5439
+      dbname: datawarehouse
+      schema: dbt_{{ env_var('DBT_USER') }}
+      threads: 4
+
+    redshift-prod:
+      type: redshift
+      host: "{{ env_var('ALLI_DATA_REDSHIFT_HOST') }}"
+      user: "{{ env_var('ALLI_DATA_REDSHIFT_USER') }}"
+      pass: "{{ env_var('ALLI_DATA_REDSHIFT_PASSWORD') }}"
+      port: 5439
+      dbname: "{{ env_var('ALLI_DATA_REDSHIFT_DATABASE') }}"
+      schema: playground_custom
+      connect_timeout: 30
+      keepalives_idle: 240
+      threads: 4
+      sslmode: require
+
+    bigquery-dev:
+      type: bigquery
+      method: oauth
+      project: pmg-datawarehouse
+      dataset: dbt_{{ env_var('DBT_USER') }}
+      threads: 4
+      timeout_seconds: 600
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: US
+      priority: interactive
+      retries: 3
+
+    bigquery-prod:
+      type: bigquery
+      method: service-account
+      project: pmg-datawarehouse
+      dataset: playground_custom
+      threads: 4
+      timeout_seconds: 600
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: US
+      priority: interactive
+      retries: 3
