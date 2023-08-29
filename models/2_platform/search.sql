@@ -16,7 +16,7 @@ transformed AS (
 
 
 SELECT
-    RAW_DATA.date as date
+    RAW_DATA.date AS date
     ,month
     ,dma
     ,tactic
@@ -60,7 +60,7 @@ FROM
         ON Cast(RAW_DATA.date as date) = Cast(CAL.date as date)
 
     GROUP BY
-       RAW_DATA.date as date
+       RAW_DATA.date
     ,month
     ,dma
     ,tactic

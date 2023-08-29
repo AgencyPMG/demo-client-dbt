@@ -6,7 +6,7 @@ materialized = 'table'
 
 WITH tv AS (
 SELECT * FROM {{ source('playground','tv_demo') }}
-)
+),
 
 
 transformed AS (
