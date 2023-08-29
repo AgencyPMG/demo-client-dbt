@@ -25,6 +25,9 @@ SELECT
     ,media_tactic AS media_tactic
     ,media_type AS media_type
     ,CAST(date AS date) AS date
+    ,week AS week
+    ,CAST(week_begins AS date) AS week_begins
+    ,CAST(week_ends AS date) AS week_ends
     ,SUM(expense) AS expense
     ,SUM(gross_calls) AS gross_calls
     ,SUM(grp_circ_impr) AS grp_circ_impr
@@ -47,6 +50,9 @@ FROM
         ,media_tactic AS media_tactic
         ,media_type AS media_type
         ,date AS date
+        ,REGEXP_EXTRACT(broadcast_week_full_name, r'Wk \d+') AS week
+        ,REGEXP_EXTRACT(broadcast_week_full_name, r'(\d{4}-\d{2}-\d{2})') AS week_begins
+        ,REGEXP_EXTRACT(broadcast_week_full_name, r'\d{4}-\d{2}-\d{2} to (\d{4}-\d{2}-\d{2})') as week_ends
         ,expense AS expense
         ,gross_calls AS gross_calls
         ,grp_circ_impr AS grp_circ_impr
@@ -58,16 +64,21 @@ FROM
 
 
     GROUP BY
-    RAW_DATA.date
-    ,fiscal_year
-    ,fiscal_month
-    ,fiscal_week
-    ,fiscal_quarter
-    ,source_table
-    ,channel
-    ,platform
+    dma
+    ,broadcast_year
+    ,broadcast_month
+    ,broadcast_period
+    ,broadcast_week_full_name
+    ,business_unit
     ,campaign_name
-    ,adgroup_name
+    ,fiscal_month
+    ,ormat
+    ,media_tactic
+    ,media_type
+    ,date
+    ,week
+    ,week_begins
+    ,week_ends
 
     )
 SELECT *

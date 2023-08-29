@@ -7,3 +7,4 @@ sources:
     tables:
       - name: paid_search_demo
       - name: tv_demo
+      - name: calendar_demo
