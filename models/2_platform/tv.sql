@@ -72,7 +72,7 @@ FROM
     ,business_unit
     ,campaign_name
     ,fiscal_month
-    ,ormat
+    ,format
     ,media_tactic
     ,media_type
     ,date
