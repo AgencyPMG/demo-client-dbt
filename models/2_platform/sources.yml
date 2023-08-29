@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: playground
+    schema: playground
+
+    tables:
+      - name: paid_search_demo
+    
