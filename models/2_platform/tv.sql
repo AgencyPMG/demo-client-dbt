@@ -49,7 +49,7 @@ FROM
         ,format AS format
         ,media_tactic AS media_tactic
         ,media_type AS media_type
-        ,date AS date
+        ,period AS date
         ,REGEXP_EXTRACT(broadcast_week_full_name, r'Wk \d+') AS week
         ,REGEXP_EXTRACT(broadcast_week_full_name, r'(\d{4}-\d{2}-\d{2})') AS week_begins
         ,REGEXP_EXTRACT(broadcast_week_full_name, r'\d{4}-\d{2}-\d{2} to (\d{4}-\d{2}-\d{2})') as week_ends
