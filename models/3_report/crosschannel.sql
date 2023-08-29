@@ -7,6 +7,7 @@ materialized = 'table'
 WITH search AS (
 SELECT * FROM {{ref('search')}}
 ),
+
 tv AS (
 SELECT * FROM {{ref('tv')}}
 )
@@ -68,8 +69,7 @@ FROM
 
     SELECT
 
-    ,dma
-    ,RAW_DATA.date AS date
+    dma
     ,year
     ,month
     ,'n/a' AS business_unit
@@ -79,6 +79,7 @@ FROM
     ,'n/a' AS format
     ,'n/a' AS media_tactic
     ,'n/a' AS media_type
+    ,date
     ,week
     ,week_begins
     ,week_ends
