@@ -91,6 +91,8 @@ FROM
     ,0 AS grp_circ_impr
     ,0 AS offered_calls
 
+    FROM search
+
     ) AS STAK
 
     GROUP BY
