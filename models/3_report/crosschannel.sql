@@ -73,11 +73,11 @@ FROM
     ,year
     ,month
     ,'n/a' AS business_unit
-    ,'n/a' AS campaign_name
+    ,'Paid Search' AS campaign_name
     ,tactic
     ,fiscal_month
-    ,'n/a' AS format
-    ,'n/a' AS media_tactic
+    ,'Paid Search' AS format
+    ,' ' AS media_tactic
     ,'n/a' AS media_type
     ,date
     ,week
