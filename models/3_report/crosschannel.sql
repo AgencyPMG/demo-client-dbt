@@ -22,7 +22,7 @@ SELECT
     ,campaign_name
     ,fiscal_month
     ,format
-    ,media_tactic
+    ,tactic
     ,media_type
     ,date
     ,week
@@ -71,7 +71,7 @@ FROM
     ,'Paid Search' AS campaign_name
     ,fiscal_month
     ,'Paid Search' AS format
-    ,tactic AS media_tactic
+    ,tactic AS tactic
     ,'n/a' AS media_type
     ,'Paid Search' AS channel
     ,date
@@ -96,7 +96,7 @@ FROM
     ,campaign_name
     ,fiscal_month
     ,format
-    ,media_tactic
+    ,tactic
     ,media_type
     ,date
     ,week
