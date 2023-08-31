@@ -28,6 +28,7 @@ SELECT
     ,week
     ,week_begins
     ,week_ends
+    ,channel
     ,SUM(impressions) AS impressions
     ,SUM(clicks) AS clicks
     ,SUM(expense) AS expense
@@ -102,3 +103,4 @@ FROM
     ,week
     ,week_begins
     ,week_ends
+    ,channel
