@@ -20,7 +20,6 @@ SELECT
     ,month
     ,business_unit
     ,campaign_name
-    ,tactic
     ,fiscal_month
     ,format
     ,media_tactic
@@ -31,10 +30,8 @@ SELECT
     ,week_ends
     ,SUM(impressions) AS impressions
     ,SUM(clicks) AS clicks
-    ,SUM(media_spend) AS media_spend
     ,SUM(expense) AS expense
     ,SUM(gross_calls) AS gross_calls
-    ,SUM(grp_circ_impr) AS grp_circ_impr
     ,SUM(offered_calls) AS offered_calls
 
 FROM
@@ -46,22 +43,20 @@ FROM
     ,broadcast_month AS month
     ,business_unit AS business_unit
     ,campaign_name AS campaign_name
-    ,'n/a' AS tactic
     ,fiscal_month AS fiscal_month
     ,format AS format
-    ,media_tactic AS media_tactic
+    ,media_tactic AS tactic
     ,media_type AS media_type
+    ,'Video' AS channel
     ,CAST(date AS date) AS date
     ,week
     ,week_begins
     ,week_ends
-    ,0 AS impressions
-    ,0 AS clicks
-    ,0 AS media_spend
-    ,expense
+    ,expense AS expense
     ,gross_calls
-    ,grp_circ_impr
+    ,grp_circ_impr AS impressions
     ,offered_calls
+    ,0 AS clicks
 
     FROM tv
 
@@ -74,22 +69,20 @@ FROM
     ,month
     ,'n/a' AS business_unit
     ,'Paid Search' AS campaign_name
-    ,tactic
     ,fiscal_month
     ,'Paid Search' AS format
-    ,' ' AS media_tactic
+    ,tactic AS media_tactic
     ,'n/a' AS media_type
+    ,'Paid Search' AS channel
     ,date
     ,week
     ,week_begins
     ,week_ends
-    ,impressions
-    ,clicks
-    ,media_spend
-    ,0 AS expense
+    ,media_spend AS expense
     ,0 AS gross_calls
-    ,0 AS grp_circ_impr
+    ,impressions AS impressions
     ,0 AS offered_calls
+    ,clicks
 
     FROM search
 
@@ -101,7 +94,6 @@ FROM
     ,month
     ,business_unit
     ,campaign_name
-    ,tactic
     ,fiscal_month
     ,format
     ,media_tactic
