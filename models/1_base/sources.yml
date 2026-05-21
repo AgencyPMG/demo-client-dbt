@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: demo
+    schema: "{{var('alli_client_slug')}}"
+    freshness:
+        warn_after: {count: 2, period: day}
+        error_after: {count: 30, period: day}
+    quoting:
+      database:  "{{ true if target.type != 'snowflake' else false }}"
+      schema: true
+      identifier: true
+    loaded_at_field: date
+
+    tables:
+      - name: profound_citations
+      - name: profound_responses
+      - name: profound_sentiment
+      - name: profound_visibility
