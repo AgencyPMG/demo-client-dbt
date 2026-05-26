@@ -1,8 +1,7 @@
-{% macro qualify(func) %}
-    {% set client_name = 'nothing_bundt_cakes' %}
+{% macro qualify(client_name, func, params) %}
     {% if target.type == 'redshift' %}
-        {{ func }}
+      {{client_name}}{{ func }}{{params}}
     {% elif target.type == 'bigquery' %}
-        {{ func|replace(client_name, "`pmg-datawarehouse`." ~ client_name) }}
+       `{{target.project}}`.{{client_name}}{{func}}{{params}}
     {% endif %}
 {% endmacro %}
