@@ -9,6 +9,16 @@ config-version: 2
 # This setting configures which "profile" dbt uses for this project.
 profile: 'analytics'
 
+
+# These below vars determine which platforms and/or report types are enabled for you client
+# Update these using the dbt_vars.json file uploaded in your customer's Alli Data Library 2.0 Refresh app 
+# See https://agencypmg.atlassian.net/wiki/spaces/PTD/pages/2917924898/Building+and+refreshing+a+Data+Library+report
+vars:
+  vars: # Replace these with the client slug name
+  alli_client_slug: nike_ai
+  alli_client_slug_core: nike_ai_core
+  alli_client_slug_custom: nike_ai_custom
+
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
@@ -38,6 +48,8 @@ models:
   demo_client_dbt:
     archive:
       enabled: false
+    1_base:
+      materialized: view
     2_platform:
       materialized: table
     3_channel:
