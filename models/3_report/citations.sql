@@ -34,12 +34,12 @@ SELECT date
     , tags
     , url
     , host_name
-    , CASE WHEN {{ qualify ('nike_ai.agentic_url_directory','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
-        ELSE {{ qualify ('nike_ai.agentic_url_directory','(MANIP_DATA.url)')}} END AS citation_page_source
-    , CASE WHEN {{ qualify ('nike_ai.agentic_promo_content','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
-        ELSE {{ qualify ('nike_ai.agentic_promo_content','(MANIP_DATA.url)')}} END AS citation_promo_content
-    , CASE WHEN {{ qualify ('nike_ai.media_type','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
-        ELSE {{ qualify ('nike_ai.media_type','(MANIP_DATA.url)')}} END AS citation_media_type
+    , CASE WHEN {{ qualify ('demo.agentic_url_directory','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
+        ELSE {{ qualify ('demo.agentic_url_directory','(MANIP_DATA.url)')}} END AS citation_page_source
+    , CASE WHEN {{ qualify ('demo.agentic_promo_content','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
+        ELSE {{ qualify ('demo.agentic_promo_content','(MANIP_DATA.url)')}} END AS citation_promo_content
+    , CASE WHEN {{ qualify ('demo.media_type','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
+        ELSE {{ qualify ('demo.media_type','(MANIP_DATA.url)')}} END AS citation_media_type
     , SUM(citations_count) AS citations_count
     , SUM(occurrences) AS occurrences
     , AVG(citation_share) AS citation_share

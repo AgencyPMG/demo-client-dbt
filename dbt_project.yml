@@ -10,14 +10,16 @@ config-version: 2
 profile: 'analytics'
 
 
+require-dbt-version: [">=1.3.0", "<2.0.0"]
+
 # These below vars determine which platforms and/or report types are enabled for you client
 # Update these using the dbt_vars.json file uploaded in your customer's Alli Data Library 2.0 Refresh app 
 # See https://agencypmg.atlassian.net/wiki/spaces/PTD/pages/2917924898/Building+and+refreshing+a+Data+Library+report
 vars:
   vars: # Replace these with the client slug name
-  alli_client_slug: nike_ai
-  alli_client_slug_core: nike_ai_core
-  alli_client_slug_custom: nike_ai_custom
+  alli_client_slug: demo
+  alli_client_slug_core: demo_core
+  alli_client_slug_custom: demo_custom
 
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
@@ -34,6 +36,12 @@ clean-targets:         # directories to be removed by `dbt clean`
     - "target"
     - "dbt_modules"
     - "dbt_packages"
+
+
+quoting:
+   database:  "{{ true if target.type != 'snowflake' else false }}"
+   schema: true
+   identifier: true
 
 
 # Configuring models
