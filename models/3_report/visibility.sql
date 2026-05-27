@@ -3,6 +3,11 @@ WITH RAW_DATA AS (
     FROM {{ ref('profound_visibility') }}
 ),
 
+RESPONSES AS (
+    SELECT *
+    FROM {{ ref('responses') }}
+),
+
 MANIP_DATA AS (
     SELECT date
         , source_table
@@ -38,10 +43,9 @@ SELECT MANIP_DATA.date
     , MANIP_DATA.visibility_score
     , MANIP_DATA.share_of_voice
     , MANIP_DATA.mentions_count AS occurrences
-    , RESPONSES.nike_product_present
     , RESPONSES.response_brands_in_order
-    , RESPONSES.nike_present
-    , RESPONSES.nike_response_rank
+    , RESPONSES.brand_present
+    , RESPONSES.brand_response_rank
 FROM MANIP_DATA
 
 LEFT JOIN RESPONSES

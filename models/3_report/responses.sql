@@ -10,10 +10,9 @@ MANIP_DATA AS (
         , model
         , region
         , prompt
-        , nike_product_present
         , response_brands_in_order
-        , nike_present
-        , nike_response_rank
+        , brand_present
+        , brand_response_rank
     FROM RAW_DATA
 )
 
@@ -24,8 +23,7 @@ SELECT date
     , model
     , region
     , prompt
-    , nike_product_present
     , response_brands_in_order
-    , nike_present
-    , nike_response_rank
+    , brand_present
+    , brand_response_rank
 FROM MANIP_DATA

@@ -38,8 +38,8 @@ SELECT date
         ELSE {{ qualify ('demo.agentic_url_directory','(MANIP_DATA.url)')}} END AS citation_page_source
     , CASE WHEN {{ qualify ('demo.agentic_promo_content','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
         ELSE {{ qualify ('demo.agentic_promo_content','(MANIP_DATA.url)')}} END AS citation_promo_content
-    , CASE WHEN {{ qualify ('demo.media_type','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
-        ELSE {{ qualify ('demo.media_type','(MANIP_DATA.url)')}} END AS citation_media_type
+    , CASE WHEN {{ qualify ('demo.agentic_media_type','(MANIP_DATA.url)')}} = 'unknown' THEN NULL
+        ELSE {{ qualify ('demo.agentic_media_type','(MANIP_DATA.url)')}} END AS citation_media_type
     , SUM(citations_count) AS citations_count
     , SUM(occurrences) AS occurrences
     , AVG(citation_share) AS citation_share

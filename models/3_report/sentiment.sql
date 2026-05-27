@@ -3,6 +3,11 @@ WITH RAW_DATA AS (
     FROM {{ ref('profound_sentiment') }}
 ),
 
+RESPONSES AS (
+    SELECT *
+    FROM {{ ref('responses') }}
+),
+
 MANIP_DATA AS (
     SELECT date
         , source_table
@@ -47,10 +52,9 @@ SELECT MANIP_DATA.date
     , MANIP_DATA.positive_sentiment
     , MANIP_DATA.negative_sentiment
     , MANIP_DATA.net_sentiment
-    , RESPONSES.nike_product_present
     , RESPONSES.response_brands_in_order
-    , RESPONSES.nike_present
-    , RESPONSES.nike_response_rank
+    , RESPONSES.brand_present
+    , RESPONSES.brand_response_rank
 FROM MANIP_DATA
 
 LEFT JOIN RESPONSES
