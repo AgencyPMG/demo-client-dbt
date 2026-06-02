@@ -369,6 +369,7 @@ models:
       askAlliEnabled: true
       owner: "analyst@pmg.com"
       docsSource: "generic-dbt"
+      isAlliDefaultSource: true
       ## Use this documentation to fill in the column mapping below https://agencypmg.atlassian.net/wiki/spaces/ANALYTICS/pages/3273031695/Certified+Datasources
     columns:
       - name: dma
