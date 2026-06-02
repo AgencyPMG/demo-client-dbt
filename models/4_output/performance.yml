@@ -1,0 +1,564 @@
+version: 2
+
+models:
+  - name: agentic_search
+    description: "table that combines all profound insights (citations, sentiment, visibility) and categories to one, comprehensive view"
+    meta:
+      isCertified: true
+      askAlliEnabled: true
+      owner: "analyst@pmg.com"
+      docsSource: "generic-dbt"
+      ## Use this documentation to fill in the column mapping below https://agencypmg.atlassian.net/wiki/spaces/ANALYTICS/pages/3273031695/Certified+Datasources
+    columns:
+      - name: date
+        description: "the date associated with the media point"
+        meta:
+          title: Date
+          sql: date
+          dimension: TRUE
+          measure: FALSE
+          type: time
+          format: null
+          isDefaultDisplayColumn: TRUE
+      - name: week
+        description: "the week (sunday week start) associated with the media point"
+        meta:
+          title: Week
+          sql: week
+          dimension: TRUE
+          measure: FALSE
+          type: time
+          format: null
+          isDefaultDisplayColumn: TRUE
+      - name: source_table
+        description: "the source table used in the code base of each data row"
+        meta:
+          title: Source Table
+          sql: source_table
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: profound_insight
+        description: "the Profound insight type (citations, visibility, sentiment) associated with the different API connections and repoting queries"
+        meta:
+          title: Profound Insight
+          sql: profound_insight
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: null
+          isDefaultDisplayColumn: TRUE
+      - name: category_id
+        description: "the Profound category ID pulled from the profound reporting URL, configured in the API call, and referenced in the different nike agentic search inititives (soccer, running, retail, peg42, peg 42)"
+        meta:
+          title: Category ID
+          sql: category_id
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: null
+          isDefaultDisplayColumn: TRUE
+      - name: category
+        description: "the Profound category pulled from the profound reporting URL, configured in the API call, and referenced in the different nike agentic search inititives (soccer, running, retail, peg42, peg 42)"
+        meta:
+          title: Category
+          sql: category
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: null
+          isDefaultDisplayColumn: TRUE
+      - name: asset_name
+        description: "the asset/company name used as a reporting dimension for visibility/sentiment reports. This is generally viewed as the retailer or brand that appears in the prompt citation (i.e. how is nike performing?)"
+        meta:
+          title: Asset Name
+          sql: asset_name
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: nike_competitor
+        description: "identifier of nike direct competitor: adidas, asics, new balance, brooks, hoka, etc... (derived from asset_name)"
+        meta:
+          title: Nike Competitor
+          sql: nike_competitor
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: model
+        description: "the LLM model used with the prompt run (chatgpt, google ai overviews, google gemini, etc) "
+        meta:
+          title: Model
+          sql: model
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: model_tier
+        description: "PMG's internal ranking of the the LLM models used"
+        meta:
+          title: Model Tier
+          sql: model_tier
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: personas
+        description: "the persona associated with the prompt run"
+        meta:
+          title: Personas
+          sql: personas
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: prompt
+        description: "the prompt text that was executed in the model for the given persona"
+        meta:
+          title: Prompt
+          sql: prompt
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: region
+        description: "the region associated with the prompt run and available as a report grouping dimension"
+        meta:
+          title: Region
+          sql: region
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: sentiment_type
+        description: "sentiment report dimension you can group by (distinct from the positive/negative metrics, and is either positive or negative)"
+        meta:
+          title: Sentiment Type
+          sql: sentiment_type
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: tags
+        description: "tags attached to the prompt (returned on prompt answers; also used as a report dimension"
+        meta:
+          title: Tags
+          sql: tags
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: theme
+        description: "sentiment report dimension; raw prompt answers also return themes (list of strings)"
+        meta:
+          title: Theme
+          sql: theme
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: topic
+        description: "the topic associated with the prompt run and available as a reporting dimension"
+        meta:
+          title: Topic
+          sql: topic
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: host_name
+        description: "the site address appearing in the citation (URL-level grouping)"
+        meta:
+          title: URL
+          sql: url
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: url
+        description: "the full URL appearing in the citation (URL-level grouping)"
+        meta:
+          title: URL
+          sql: url
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: citation_page_source
+        description: "the type of nike page pulled from the citations URL: product detail pages, shop grid pages, organic growth content(derived from URL)"
+        meta:
+          title: Citation Page Source
+          sql: citation_page_source
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: citation_promo_content
+        description: "identifies the nike promo content based on the citation url (i.e. running shoe content)"
+        meta:
+          title: Citation Promo Content
+          sql: citation_promo_content
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: response_brands_in_order
+        description: "order in which nike and competing shoe brands specified (brooks, hoka, saucony, asics, new balance, on, mizuno, adidas) appear in the prompt response"
+        meta:
+          title: Response Brands In Order
+          sql: response_brands_in_order
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: nike_present
+        description: "pulled directly from the prompt responses, this field indicated whether or not nike is present in the response"
+        meta:
+          title: Nike Present
+          sql: nike_present
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: nike_response_rank
+        description: "order in which nike appears in the prompt response based on the competing shoe brands specified (brooks, hoka, saucony, asics, new balance, on, mizuno, adidas)"
+        meta:
+          title: Nike Response Rank
+          sql: nike_response_rank
+          dimension: FALSE
+          measure: TRUE
+          type: avg
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: occurrences
+        description: "the number of times the asset_name appears in the response (visbility), the number of times a URL was mentioned in the prompt response (citations), or the number of positive and negative occurances (sentiment)"
+        meta:
+          title: Occurrences
+          sql: occurrences
+          dimension: FALSE
+          measure: TRUE
+          type: sum
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: negative
+        description: "the number of occurrences in the prompt response with negative sentiment"
+        meta:
+          title: Negative
+          sql: negative
+          dimension: FALSE
+          measure: TRUE
+          type: sum
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: positive
+        description: "the number of occurrences in the prompt response with negative sentiment"
+        meta:
+          title: Positive
+          sql: positive
+          dimension: FALSE
+          measure: TRUE
+          type: sum
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: brand_mentions
+        description: "the number of times the asset_name appears in the prompt response, or the number of mentions in the response"
+        meta:
+          title: Brand Mentions
+          sql: brand_mentions
+          dimension: FALSE
+          measure: TRUE
+          type: sum
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: citations_count
+        description: "number of occurrences a particular citation URL has in a prompt response"
+        meta:
+          title: Citations Count
+          sql: citations_count
+          dimension: FALSE
+          measure: TRUE
+          type: sum
+          format: NULL
+          isDefaultDisplayColumn: FALSE
+      - name: visibility_score
+        description: "calculated at the asset_name and model level, the share of total prompts mentions a particular asset occupies: prompt responses mentioning brand / total prompt responses"
+        meta:
+          title: Visibility_score
+          sql: visibility_score
+          dimension: FALSE
+          measure: TRUE
+          type: avg
+          format: percent
+          isDefaultDisplayColumn: TRUE
+      - name: share_of_voice
+        description: "calculated at the asset_name and model level, this is mentions of Nike in AI-generated answers in relation to competitors: brand mentions in prompt responses / total brands mentioned in prompt responses"
+        meta:
+          title: Share Of Voice
+          sql: share_of_voice
+          dimension: FALSE
+          measure: TRUE
+          type: avg
+          format: percent
+          isDefaultDisplayColumn: TRUE
+      - name: citation_share
+        description: "calculated at the host_name and topic level, this is the share of total citations a particular citation URL has: citations per host_name / total citations"
+        meta:
+          title: Citation Share
+          sql: citation_share
+          dimension: FALSE
+          measure: TRUE
+          type: avg
+          format: percent
+          isDefaultDisplayColumn: TRUE
+      - name: positive_sentiment_rate
+        description: "the proportion of total sentiment signals that are positive: positive sentiment / occurrences"
+        meta:
+          title: Positive Sentiment Rate
+          sql: positive_sentiment_rate
+          dimension: FALSE
+          measure: TRUE
+          type: avg
+          format: percent
+          isDefaultDisplayColumn: TRUE
+      - name: negative_sentiment_rate
+        description: "the proportion of total sentiment signals that are negative: negative sentiment / occurrences"
+        meta:
+          title: Negative Sentiment Rate
+          sql: negative_sentiment_rate
+          dimension: FALSE
+          measure: TRUE
+          type: avg
+          format: percent
+          isDefaultDisplayColumn: TRUE
+      - name: net_sentiment
+        description: "measures the overall tone by comparing positive and negative signals relative to total sentiment volume: (positive sentiment - negative sentiment) / occurrences"
+        meta:
+          title: Net Sentiment
+          sql: net_sentiment
+          dimension: FALSE
+          measure: TRUE
+          type: avg
+          format: percent
+          isDefaultDisplayColumn: TRUE
+
+
+  - name: crosschannel
+    description: "table that combines all media platforms"
+    meta:
+      isCertified: true
+      askAlliEnabled: true
+      owner: "analyst@pmg.com"
+      docsSource: "generic-dbt"
+      isAlliDefaultSource: true
+      ## Use this documentation to fill in the column mapping below https://agencypmg.atlassian.net/wiki/spaces/ANALYTICS/pages/3273031695/Certified+Datasources
+    columns:
+      - name: dma
+        description: "the geographic region where the media was run"
+        meta:
+          title: DMA
+          sql: dma
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: broadcast_year
+        description: "TBD"
+        meta:
+          title: Broadcast Year
+          sql: broadcast_year
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: broadcast_month
+        description: "TBD"
+        meta:
+          title: Broadcast Month
+          sql: broadcast_month
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: broadcast_period
+        description: "TBD"
+        meta:
+          title: Broadcast Period
+          sql: broadcast_period
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: broadcast_week_full_name
+        description: "TBD"
+        meta:
+          title: Broadcast Week Full Name
+          sql: broadcast_week_full_name
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: business_unit
+        description: "TBD"
+        meta:
+          title: Business Unit
+          sql: business_unit
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: campaign_name
+        description: "TBD"
+        meta:
+          title: Campaign Name
+          sql: campaign_name
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: fiscal_month
+        description: "TBD"
+        meta:
+          title: Fiscal Month
+          sql: fiscal_month
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: format
+        description: "TBD"
+        meta:
+          title: Format
+          sql: format
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: media_tactic
+        description: "TBD"
+        meta:
+          title: Media Tactic
+          sql: media_tactic
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: media_type
+        description: "TBD"
+        meta:
+          title: Media Type
+          sql: media_type
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: date
+        description: "the date associated with the media"
+        meta:
+          title: Date
+          sql: date
+          dimension: TRUE
+          measure: FALSE
+          type: time
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: week
+        description: "the week associated with the media"
+        meta:
+          title: Week
+          sql: week
+          dimension: TRUE
+          measure: FALSE
+          type: string
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: week_begins
+        description: "the week start associated with the media"
+        meta:
+          title: Week Begins
+          sql: week_begins
+          dimension: TRUE
+          measure: FALSE
+          type: time
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: week_ends
+        description: "the week end associated with the media"
+        meta:
+          title: Week Ends
+          sql: week_ends
+          dimension: TRUE
+          measure: FALSE
+          type: time
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: expense
+        description: "the spend reported by the media platform without additional fees (e.g. agency fees)"
+        meta:
+          title: Expense
+          sql: expense
+          dimension: FALSE
+          measure: TRUE
+          type: currency
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: gross_calls
+        description: "TBD"
+        meta:
+          title: Gross Calls
+          sql: gross_calls
+          dimension: FALSE
+          measure: TRUE
+          type: sum
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: grp_circ_impr
+        description: "TBD"
+        meta:
+          title: Grp Circ Imprressions
+          sql: grp_circ_impr
+          dimension: FALSE
+          measure: TRUE
+          type: sum
+          format: NULL
+          isDefaultDisplayColumn: TRUE
+      - name: offered_calls
+        description: "TBD"
+        meta:
+          title: Offered Calls
+          sql: offered_calls
+          dimension: FALSE
+          measure: TRUE
+          type: sum
+          format: NULL
+          isDefaultDisplayColumn: TRUE
