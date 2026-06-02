@@ -10,8 +10,8 @@ TV AS (
 
 STAK AS (
     SELECT dma AS dma
-        , CAST(broadcast_year AS {{ type_float() }}) AS year
-        , CAST(broadcast_month AS {{ type_float() }}) AS month
+        , CAST(broadcast_year AS {{ type_string() }}) AS year
+        , CAST(broadcast_month AS {{ type_string() }}) AS month
         , business_unit AS business_unit
         , campaign_name AS campaign_name
         , fiscal_month AS fiscal_month
@@ -20,7 +20,7 @@ STAK AS (
         , media_type AS media_type
         , 'video' AS channel
         , CAST(date AS date) AS date
-        , CAST(week AS {{ type_float() }}) AS week
+        , CAST(week AS {{ type_string() }}) AS week
         , CAST(week_begins AS date) AS week_begins
         , CAST(week_ends AS date) AS week_ends
         , expense AS expense
@@ -33,8 +33,8 @@ STAK AS (
     UNION ALL
 
     SELECT dma
-        , CAST(year AS {{ type_float() }}) AS year
-        , CAST(month AS {{ type_float() }}) AS month
+        , CAST(year AS {{ type_string() }}) AS year
+        , CAST(month AS {{ type_string() }}) AS month
         , 'n/a' AS business_unit
         , 'paid search' AS campaign_name
         , fiscal_month
@@ -43,7 +43,7 @@ STAK AS (
         , 'n/a' AS media_type
         , 'paid search' AS channel
         , CAST(date AS date) AS date
-        , CAST(week AS {{ type_float() }}) AS week
+        , CAST(week AS {{ type_string() }}) AS week
         , CAST(week_begins AS date) AS week_begins
         , CAST(week_ends AS date) AS week_ends
         , media_spend AS expense

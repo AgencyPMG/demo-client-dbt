@@ -1,6 +1,6 @@
 WITH RAW_DATA AS (
     SELECT *
-    FROM {{ source('playground', 'calendar_demo') }}
+    FROM {{ source('demo', 'calendar_demo') }}
 )
 
 SELECT CAST(date AS date) AS date
