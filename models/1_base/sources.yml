@@ -17,3 +17,6 @@ sources:
       - name: profound_responses
       - name: profound_sentiment
       - name: profound_visibility
+      - name: tv_demo
+      - name: paid_search_demo
+      - name: calendar_demo
